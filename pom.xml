@@ -1,0 +1,432 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<repositories>
+		<repository>
+			<id>jasper-3rd-party</id>
+			<name>Jasper3rdParty</name>
+			<url>http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
+		</repository>
+	</repositories>
+
+	<groupId>com.ghx.api.operations</groupId>
+	<artifactId>operations-api</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
+	<name>operations-config-api</name>
+	<description>operations API - Pricing Tier and Prepaid Configuration and ticket Services</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<ng-commons.version>1.0.1</ng-commons.version>
+		<io.jsonwebtoken.version>0.9.1</io.jsonwebtoken.version>
+		<org.modelmapper.version>2.3.2</org.modelmapper.version>
+		<javax.persistence.version>1.0.2</javax.persistence.version>
+		<net.rakugakibox.spring.boot.version>1.9.0</net.rakugakibox.spring.boot.version>
+		<ghx.search.version>4.5.1</ghx.search.version>
+		<mongodb.version>4.6.0</mongodb.version>
+		<elasticsearch.version>7.4.2</elasticsearch.version>
+		<pdfbox.version>2.0.19</pdfbox.version>
+		<jasperreports.version>6.12.2</jasperreports.version>
+		<apache.poi.version>4.1.2</apache.poi.version>
+		<aws-java-sdk-sqs.version>1.11.873</aws-java-sdk-sqs.version>
+		<aws-java-sdk-core.version>1.11.873</aws-java-sdk-core.version>
+		<aws-java-sdk-lambda.version>1.11.873</aws-java-sdk-lambda.version>
+		<com.ghx.messagecenter.version>2.0.0</com.ghx.messagecenter.version>
+		<event-utils.version>1.0.5-SNAPSHOT</event-utils.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ghx.messagecenter</groupId>
+			<artifactId>messagecenter-client</artifactId>
+			<version>${com.ghx.messagecenter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ghx.ngcommons</groupId>
+			<artifactId>event-utils</artifactId>
+			<version>${event-utils.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ghx.ngcommons</groupId>
+			<artifactId>security</artifactId>
+			<version>${ng-commons.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${io.jsonwebtoken.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${org.modelmapper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>${javax.persistence.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.rakugakibox.spring.boot</groupId>
+			<artifactId>orika-spring-boot-starter</artifactId>
+			<version>${net.rakugakibox.spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>2.2.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.2.0</version>
+			<classifier>no_aop</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ghx.commons.logger</groupId>
+			<artifactId>ghx-logger</artifactId>
+			<version>2.6.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>problem-spring-web</artifactId>
+			<version>0.25.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ghx.common</groupId>
+			<artifactId>ghx-search</artifactId>
+			<version>${ghx.search.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>log4j</groupId>
+    				<artifactId>log4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Jasper report dependencies -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>${pdfbox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${jasperreports.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-core</artifactId>
+			<version>${aws-java-sdk-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sqs</artifactId>
+			<version>${aws-java-sdk-sqs.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-lambda</artifactId>
+			<version>${aws-java-sdk-lambda.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-dynamodb</artifactId>
+			<version>1.11.292</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-path</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>xml-path</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+		 <dependency>
+	      <groupId>org.mockito</groupId>
+	      <artifactId>mockito-core</artifactId>
+	      <version>3.12.2</version>
+	      <scope>test</scope>
+       </dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-inline</artifactId>
+			<version>3.12.2</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<properties>
+						<includeTags>unitTests</includeTags>
+					</properties>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- clover report coverage plugin -->
+			<plugin>
+	           <groupId>org.openclover</groupId>
+	           <artifactId>clover-maven-plugin</artifactId>
+	           <version>4.4.1</version>
+       		</plugin>
+		</plugins>
+	</build>
+	<profiles>
+<!-- Profiles for OpenClover coverage report -->        
+        <profile>
+            <!-- DO NOT RUN THIS PROFILE WITH 'mvn package', 'mvn install' or 'mvn deploy' phase
+                It does a source code instrumentation and modifies the generated/compiled java class files. So, if
+                you ran with 'mvn install', you production code will have the instrumented source code which is BAD.To run this use 'mvn compile -P clover-instrument-->
+            <id>clover-instrument</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openclover</groupId>
+                        <artifactId>clover-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>instrument-test</id>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <singleCloverDatabase>true</singleCloverDatabase>
+                                    <includesTestSourceRoots>true</includesTestSourceRoots>
+                                    <includesList>**/com/ghx/**</includesList>
+                                    <!-- Skipping JedisCacheImpl.java cause of a bug in OpenClover where it does not
+                                    support Type Annotation. Issue - https://github.com/openclover/clover/issues/20
+                                    -->
+                                    <excludesList>**/dao/*.java,**/enums/**,**/dto/**,**/domain*/**,**/entity*/**,**/mapper*/**,**/exception*/**,**/config/**,**/healthcheck/**,**/problem/**,**/embeddedmongo/**
+                                    </excludesList>
+                                </configuration>
+                                <goals>
+                                    <!-- Only use 'instrument-test' goal for instrumentation
+                                     because it runs maven only till 'test' lifecycle phase.
+                                     Other Clover instrument goals like 'setup' and 'instrument' would run maven install
+                                     phase and make ur .m2 folder bad. DONT USE THEM.
+                                    -->
+                                    <goal>instrument-test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- Run this profile to generate historical reports after clover-instrument 
+                profile has been run. Do not use 'mvn' with clean option, else we would lose 
+                the instrumnetation and coverage data generated by clover-instrument profile. 
+                To run it, use - 'mvn compile -P clover-save-history -N'. Non-recursive mode 
+                as we just need it run for the base project (ghx base module) -->
+            <id>clover-save-history</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openclover</groupId>
+                        <artifactId>clover-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>clover-save-history</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>save-history</goal>
+                                </goals>
+                                <inherited>false</inherited>
+                                <configuration>
+                                    <singleCloverDatabase>false</singleCloverDatabase>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- Run this profile after clover-instrument. If historical reports are needed, then run it after
+            clover-save-history profile. Do not use 'mvn' with clean option, else we would lose the instrumentation,
+            coverage data and historical report data generated by clover-instrument and clover-save-history profiles.
+            To run it, use - 'mvn site -P clover-report -Dmaven.site.skip=true -N'. Non-recursive mode as we just need
+            it run for the base project (ghx base module)
+            -->
+            <id>clover-report</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openclover</groupId>
+                        <artifactId>clover-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>clover</id>
+                                <phase>pre-site</phase>
+                                <goals>
+                                    <goal>clover</goal>
+                                </goals>
+                                <inherited>false</inherited>
+                                <configuration>
+                                    <generatePdf>true</generatePdf>
+                                    <generateXml>true</generateXml>
+                                    <alwaysReport>true</alwaysReport>
+                                    <generateHistorical>true</generateHistorical>
+                                    <singleCloverDatabase>false</singleCloverDatabase>
+                                    <title>Operations API - ${project.version}</title>
+                                    <titleAnchor>dashboard.html</titleAnchor>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+	</profiles>
+</project>

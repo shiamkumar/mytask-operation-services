@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <servers>
+    <server>
+      <id>GHX</id>
+      <username>bamboo</username>
+      <password>bamboo1</password>
+    </server>
+    <server>
+      <id>GHX Snapshot</id>
+      <username>bamboo</username>
+      <password>bamboo1</password>
+    </server>
+    <server>
+      <id>enhance</id>
+      <username>bamboo</username>
+      <password>bamboo1</password>
+    </server>
+    <server>
+      <id>enhance-snapshot</id>
+      <username>bamboo</username>
+      <password>bamboo1</password>
+    </server>
+    <server>
+      <id>artifactory</id>
+      <username>bamboo</username>
+      <password>bamboo1</password>
+    </server>
+    <server>
+      <id>artifactory-snapshot</id>
+      <username>bamboo</username>
+      <password>bamboo1</password>
+    </server>
+    <server>
+      <id>artifactory-remote</id>
+      <username>bamboo</username>
+      <password>bamboo1</password>
+    </server>
+  </servers>
+
+ <profiles>
+    <profile>
+      <id>artifactory</id>
+      <repositories>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>artifactory</id>
+          <name>ghx-all</name>
+          <url>https://ghxrepo.jfrog.io/ghxrepo/ghx-all</url>
+        </repository>
+        <repository>
+          <snapshots />
+          <id>artifactory-snapshot</id>
+          <name>ghx-snapshot</name>
+          <url>https://ghxrepo.jfrog.io/ghxrepo/ghx-snapshot</url>
+        </repository>
+	<repository>
+          <id>vision-framework-release</id>
+          <name>vision-framework-release</name>
+          <url>https://ghxrepo.jfrog.io/ghxrepo/vision-framework-release</url>
+        </repository>
+        <repository>
+          <snapshots />
+          <id>enhance</id>
+          <name>enhance</name>
+          <url>https://ghxrepo.jfrog.io/ghxrepo/enhance</url>
+        </repository>
+        <repository>
+          <snapshots />
+          <id>artifactory-remote</id>
+          <name>ghx-remotes</name>
+          <url>https://ghxrepo.jfrog.io/ghxrepo/remote-repos</url>
+        </repository>
+	<repository>
+	  <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>artifactory-jasper-repo</id>
+          <name>Jasper3rdParty</name>
+          <url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts</url>
+        </repository>
+      </repositories>
+
+      <pluginRepositories>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>artifactory</id>
+          <name>plugins-release</name>
+          <url>https://ghxrepo.jfrog.io/ghxrepo/plugins-release</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots />
+          <id>artifactory-snapshot</id>
+          <name>plugins-snapshot</name>
+          <url>https://ghxrepo.jfrog.io/ghxrepo/plugins-snapshot</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>artifactory</activeProfile>
+  </activeProfiles>
+</settings>
